@@ -7,6 +7,8 @@
     <link rel="stylesheet" th:href="@{css/style.css}">
 </head>
 <body>
+<span id="error" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+
 <section>
     <h3>Add new list</h3>
     <form th:object="${newTaskList}" method="POST" action="/add-task-list">
