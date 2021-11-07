@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+
+    <link rel="stylesheet" th:href="@{css/style.css}">
+</head>
+<body>
+<section>
+    <h3>Add new list</h3>
+    <form th:object="${newTaskList}" method="POST" action="/add-task-list">
+        <label>Name:<input type="text" th:field="*{name}"/></label>
+        <input type="submit" value="add">
+    </form>
+</section>
+
+<h3>Task lists</h3>
+
+<th:block th:each="taskList : ${taskLists}">
+    <section>
+        <h4 th:text="'Id: '+${taskList.getId()} +', Name: '+ ${taskList.getName()}"></h4>
+        <section>
+            <h5>Add new task</h5>
+            <form th:object="${newTask}" method="POST" th:action="@{'/task-list/'+${taskList.getId()}+'/add-task/'}">
+                <label>Name:<input type="text" th:field="*{name}"/></label>
+                <label>Description:<input type="text" th:field="*{description}"/></label>
+                <input type="submit" value="add">
+            </form>
+        </section>
+        <section>
+            <h5>Tasks:</h5>
+            <th:block th:each="task : ${taskList.getTasks()}">
+                <section>
+                    <div th:text="'Id: ' + ${task.getId()}"></div>
+                    <div th:text="'Name: ' + ${task.getName()}"></div>
+                    <div th:text="'Description: '+ ${task.getDescription()}"></div>
+                    <div th:text="'Task is done: ' + ${task.getDone()}"></div>
+                    <div>
+                        <form method="post" th:action="@{'/done-task/'+${task.getId()}}">
+                            <input th:if="${task.getDone()==false}" type="submit" value="done">
+                        </form>
+                    </div>
+                </section>
+            </th:block>
+
+        </section>
+        <section>
+            <form method="post" th:action="@{'/delete-task-list/'+${taskList.getId()}}">
+                <input type="submit" value="delete task list">
+            </form>
+        </section>
+    </section>
+</th:block>
+
+
+</body>
+</html>
