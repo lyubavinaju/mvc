@@ -1,9 +1,41 @@
-section {
-  border: black 1px solid;
-  padding: 1rem;
+div {
+  /*border: black 1px solid;*/
 }
 
 #error {
   color: red;
   font-size: 1rem;
+}
+
+.task-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.task {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 0.4rem;
+  border: 1px burlywood dashed;
+}
+
+.task > *, .task-list-header > * {
+  margin-right: 0.4rem;
+}
+
+.task-list {
+  margin-bottom: 0.4rem;
+  border: 1px gray dotted;
+}
+
+.add-task {
+  display: flex;
+  flex-direction: column;
+}
+
+.task{
+  display: flex;
+  flex-direction: column;
 }
